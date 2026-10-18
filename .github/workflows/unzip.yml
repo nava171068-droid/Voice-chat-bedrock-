@@ -1,17 +1,33 @@
+
 name: Unzip
-on: workflow_dispatch
+
+on:
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   unzip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
+
+      - name: Check ZIP file
+        run: |
+          ls -la
+          test -f VCBridge-github-repo.zip || {
+            echo "ZIP file not found in repository root"
+            exit 1
+          }
+
+      - name: Extract and push
+        run: |
           unzip -o VCBridge-github-repo.zip -x ".github/*"
           rm VCBridge-github-repo.zip
           git config user.name "bot"
           git config user.email "bot@users.noreply.github.com"
           git add -A
-          git commit -m "Add project files"
+          git commit -m "Add project files" || echo "No changes to commit"
           git push
+          

@@ -29,17 +29,15 @@ jobs:
           gradle -p android assembleDebug --no-daemon --console=plain > build.log 2>&1
           code=$?
           if [ $code -ne 0 ]; then
+            grep -E '^e: ' build.log | sed 's#file:///home/runner/work/[^/]*/[^/]*/##' | head -15 > errs.txt
+            sed -n '/What went wrong/,/^\* Try/p' build.log | head -15 >> errs.txt
             {
               echo "## Build errors"
               echo '```'
-              grep -E '^e: |What went wrong|^> |error:|Could not|not found|FAILED' build.log | head -30
-              echo '```'
-              echo "## Last 40 lines"
-              echo '```'
-              tail -40 build.log
+              cat errs.txt
               echo '```'
             } >> "$GITHUB_STEP_SUMMARY"
-            echo "::error title=Build failed::$(grep -E '^e: |What went wrong|^> |error:|Could not' build.log | head -8 | tr '\n' ' ')"
+            echo "::error title=Build failed::$(tr '\n' ' ' < errs.txt)"
             exit 1
           fi
       - uses: actions/upload-artifact@v4

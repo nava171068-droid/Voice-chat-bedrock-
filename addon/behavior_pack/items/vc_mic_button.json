@@ -1,0 +1,12 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:item": {
+    "description": { "identifier": "vc:mic_button", "menu_category": { "category": "none" } },
+    "components": {
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": "vc_mic",
+      "minecraft:glint": false,
+      "minecraft:hand_equipped": false
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "namespace": "hud",
+
+  "root_panel": {
+    "modifications": [
+      { "array_name": "controls", "operation": "insert_front",
+        "value": [ { "vc_buttons@vc.buttons_root": {} } ] }
+    ]
+  },
+
+  // the state title is only a data channel — never draw it
+  "hud_title_text": { "ignored": true },
+  "hud_title_text_area": { "ignored": true },
+
+  // hotbar shows 8 slots; slot 9 is the hidden button slot
+  "hotbar_grid": { "grid_dimensions": [8, 1], "grid_dimension_binding": "", "maximum_grid_items": 8 },
+  "edu_hotbar_grid": { "grid_dimensions": [8, 1], "grid_dimension_binding": "", "maximum_grid_items": 8 },
+  "hotbar_panel_pocket/hotbar_grid": { "grid_dimensions": [8, 1], "grid_dimension_binding": "", "maximum_grid_items": 8 },
+  "gui_hotbar_grid_item": {
+    "modifications": [ { "array_name": "bindings", "operation": "insert_back",
+      "value": { "binding_type": "view", "binding_condition": "always",
+        "source_property_name": "(#collection_index >= 8)", "target_property_name": "#ignored" } } ]
+  },
+  "gui_hotbar_grid_item_pocket": {
+    "size": ["12.5%", "100%"],
+    "modifications": [ { "array_name": "bindings", "operation": "insert_back",
+      "value": { "binding_type": "view", "binding_condition": "always",
+        "source_property_name": "(#collection_index >= 8)", "target_property_name": "#ignored" } } ]
+  },
+  "hotbar_elipses_panel_left": { "ignored": true },
+  "hotbar_elipses_panel_right": { "ignored": true },
+  "hotbar_panel_pocket/hotbar_elipses_panel_left": { "ignored": true },
+  "hotbar_panel_pocket/hotbar_elipses_panel_right": { "ignored": true }
+}

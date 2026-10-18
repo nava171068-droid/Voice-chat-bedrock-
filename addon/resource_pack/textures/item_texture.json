@@ -1,0 +1,2 @@
+{ "resource_pack_name": "voicechat", "texture_name": "atlas.items",
+  "texture_data": { "vc_mic": { "textures": "textures/items/vc_mic" } } }

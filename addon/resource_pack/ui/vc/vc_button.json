@@ -1,0 +1,73 @@
+{
+  "namespace": "vc",
+
+  "bg_img": { "type": "image", "texture": "$bg", "size": ["100%", "100%"] },
+
+  "vc_btn@common.button": {
+    "size": ["100%", "100%"],
+    "alpha": 0.75,
+    "propagate_alpha": true,
+    "always_listen_to_input": true,
+    "prevent_touch_input": true,
+    "sound_name": "random.click",
+    "button_mappings": [
+      { "from_button_id": "button.menu_select", "to_button_id": "button.slot_9",
+        "mapping_type": "pressed", "button_up_right_of_first_refusal": true }
+    ],
+    "controls": [
+      { "default@vc.bg_img": { "$bg": "textures/vc/ui/button" } },
+      { "hover@vc.bg_img": { "$bg": "textures/vc/ui/button_pressed" } },
+      { "pressed@vc.bg_img": { "$bg": "textures/vc/ui/button_pressed" } }
+    ]
+  },
+
+  "icon_img": {
+    "type": "image", "$icon": "", "texture": "$icon", "size": ["80%", "80%"], "keep_ratio": true,
+    "anchor_from": "center", "anchor_to": "center", "layer": 3
+  },
+
+  // The script sends the state as a hidden title: "vc:on" | "vc:off" | "vc:set" (sneaking)
+  "mic_on_icon@vc.icon_img": {
+    "$icon": "textures/vc/ui/icon_mic_on",
+    "bindings": [
+      { "binding_name": "#hud_title_text_string" },
+      { "binding_type": "view",
+        "source_property_name": "(not ((#hud_title_text_string - 'vc:on') = #hud_title_text_string))",
+        "target_property_name": "#visible" }
+    ]
+  },
+  "mic_off_icon@vc.icon_img": {
+    "$icon": "textures/vc/ui/icon_mic_off",
+    "bindings": [
+      { "binding_name": "#hud_title_text_string" },
+      { "binding_type": "view",
+        "source_property_name": "(not ((#hud_title_text_string - 'vc:off') = #hud_title_text_string))",
+        "target_property_name": "#visible" }
+    ]
+  },
+  "settings_icon@vc.icon_img": {
+    "$icon": "textures/vc/ui/icon_settings",
+    "bindings": [
+      { "binding_name": "#hud_title_text_string" },
+      { "binding_type": "view",
+        "source_property_name": "(not ((#hud_title_text_string - 'vc:set') = #hud_title_text_string))",
+        "target_property_name": "#visible" }
+    ]
+  },
+
+  "vc_button": {
+    "type": "input_panel", "prevent_touch_input": true, "propagate_alpha": true,
+    "size": [20, 20], "anchor_from": "top_middle", "anchor_to": "top_middle", "offset": [54, 3],
+    "controls": [
+      { "btn@vc.vc_btn": {} },
+      { "on@vc.mic_on_icon": {} },
+      { "off@vc.mic_off_icon": {} },
+      { "set@vc.settings_icon": {} }
+    ]
+  },
+
+  "buttons_root": {
+    "type": "panel", "size": ["100%", "100%"], "layer": 120,
+    "controls": [ { "vc_button@vc.vc_button": {} } ]
+  }
+}

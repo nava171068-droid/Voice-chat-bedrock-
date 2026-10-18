@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "VC Bridge (Bedrock)",
+    "description": "Menus for the VC Bridge voice app: rooms, kick/ban, volumes. Connect with /connect 127.0.0.1:3000",
+    "uuid": "6b0f7d2e-3a41-4c8e-9d52-1f7a8c3e5b10",
+    "version": [0, 2, 0],
+    "min_engine_version": [1, 21, 100]
+  },
+  "modules": [
+    { "type": "script", "language": "javascript", "uuid": "a2c9e4f1-7d36-4b85-8e0a-5c1b9d6f2e47", "version": [0, 2, 0], "entry": "scripts/main.js" }
+  ],
+  "dependencies": [
+    { "module_name": "@minecraft/server", "version": "2.0.0" },
+    { "module_name": "@minecraft/server-ui", "version": "2.0.0" }
+  ]
+}

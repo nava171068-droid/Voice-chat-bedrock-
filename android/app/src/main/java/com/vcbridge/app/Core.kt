@@ -374,24 +374,4 @@ object Core : GameServer.Listener, RelayClient.Listener {
     private fun notifyUi() {
         main.post { for (r in listeners) r.run() }
     }
-}yList<Member>()
-                for (i in 0 until arr.length()) {
-                    val m = arr.getJSONObject(i)
-                    list.add(Member(m.getInt("u"), m.getString("n")))
-                }
-                members = list
-                if (prev != code) speaking = emptySet()
-                if (code.isNotEmpty()) startAudio()
-                applyAudio()
-                pushState()
-                notifyUi()
-            }
-            "speak" -> {
-                val arr = o.optJSONArray("s") ?: JSONArray()
-                val s = HashSet<Int>()
-                for (i in 0 until arr.length()) s.add(arr.getInt(i))
-                speaking = s
-                notifyUi()
-            }
-            "err" -> report(o.optString("k"))
-            "kicked" -> { cle
+}

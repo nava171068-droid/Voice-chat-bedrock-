@@ -124,14 +124,14 @@ object Core : GameServer.Listener, RelayClient.Listener {
     fun kick(num: Int) = sendRelay(JSONObject().put("t", "kick").put("u", num))
     fun ban(num: Int) = sendRelay(JSONObject().put("t", "ban").put("u", num))
 
-    fun setMuted(b: Boolean) {
+    @JvmName("applyMuted") fun setMuted(b: Boolean) {
         muted = b
         applyAudio()
         pushState()
         notifyUi()
     }
 
-    fun setDeaf(b: Boolean) {
+    @JvmName("applyDeaf") fun setDeaf(b: Boolean) {
         deaf = b
         applyAudio()
         pushState()
@@ -374,4 +374,24 @@ object Core : GameServer.Listener, RelayClient.Listener {
     private fun notifyUi() {
         main.post { for (r in listeners) r.run() }
     }
-}
+}yList<Member>()
+                for (i in 0 until arr.length()) {
+                    val m = arr.getJSONObject(i)
+                    list.add(Member(m.getInt("u"), m.getString("n")))
+                }
+                members = list
+                if (prev != code) speaking = emptySet()
+                if (code.isNotEmpty()) startAudio()
+                applyAudio()
+                pushState()
+                notifyUi()
+            }
+            "speak" -> {
+                val arr = o.optJSONArray("s") ?: JSONArray()
+                val s = HashSet<Int>()
+                for (i in 0 until arr.length()) s.add(arr.getInt(i))
+                speaking = s
+                notifyUi()
+            }
+            "err" -> report(o.optString("k"))
+            "kicked" -> { cle
